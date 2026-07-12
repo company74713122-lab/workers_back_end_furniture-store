@@ -1,6 +1,22 @@
 import { AppError } from './api-response.js';
 
-// ✅ رفع ملف واحد إلى Cloudinary
+// ✅ دالة مساعدة لتوليد signature
+async function generateSignature(params, apiSecret) {
+  const sortedParams = Object.keys(params)
+    .sort()
+    .map(key => `${key}=${params[key]}`)
+    .join('&');
+  
+  const paramsString = `${sortedParams}${apiSecret}`;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(paramsString);
+  
+  const hashBuffer = await crypto.subtle.digest('SHA-1', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ✅ رفع ملف واحد إلى Cloudinary مع ضغط (Signed Upload)
 export async function uploadToCloudinary(file, env, folder = 'products') {
   if (!file || !(file instanceof File)) {
     throw new AppError(400, 'Invalid file');
@@ -16,10 +32,32 @@ export async function uploadToCloudinary(file, env, folder = 'products') {
     throw new AppError(400, 'File size must be less than 10MB');
   }
 
+  // التحقق من وجود API Secret
+  if (!env.CLOUDINARY_API_SECRET) {
+    throw new AppError(500, 'CLOUDINARY_API_SECRET is not configured');
+  }
+
+  const timestamp = Math.round(Date.now() / 1000);
+  
+  // ✅ إعدادات الضغط (تُطبق تلقائياً)
+  const transformation = 'f_auto,q_auto:good,w_1200,c_limit';
+  
+  // معاملات التوقيع
+  const signatureParams = {
+    timestamp,
+    folder,
+    transformation,
+  };
+  
+  const signature = await generateSignature(signatureParams, env.CLOUDINARY_API_SECRET);
+
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', env.CLOUDINARY_UPLOAD_PRESET);
+  formData.append('api_key', env.CLOUDINARY_API_KEY);
+  formData.append('timestamp', String(timestamp));
+  formData.append('signature', signature);
   formData.append('folder', folder);
+  formData.append('transformation', transformation);
 
   const response = await fetch(
     `https://api.cloudinary.com/v1_1/${env.CLOUDINARY_CLOUD_NAME}/image/upload`,
@@ -119,14 +157,12 @@ export async function deleteMultipleFromCloudinary(publicIds, env) {
 export async function syncCloudinaryImages(oldImages, newImages, env) {
   if (!oldImages || oldImages.length === 0) return;
   
-  // استخراج public_ids من الصور الجديدة
   const newPublicIds = new Set(
     (newImages || [])
       .map(img => img.public_id)
       .filter(Boolean)
   );
   
-  // الصور التي يجب حذفها (قديمة وليست في الجديدة)
   const toDelete = oldImages
     .filter(img => img.public_id && !newPublicIds.has(img.public_id))
     .map(img => img.public_id);
