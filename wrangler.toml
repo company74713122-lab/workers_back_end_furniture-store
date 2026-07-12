@@ -1,4 +1,4 @@
-name = "furniture-store-api2"
+name = "furniture-store-api3"
 main = "src/index.js"
 compatibility_date = "2024-09-25"
 compatibility_flags = ["nodejs_compat"]

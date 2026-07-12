@@ -8,11 +8,14 @@ const app = new Hono();
 
 // ✅ Middlewares
 app.use('*', logger());
+
+// ✅ CORS - الحل الأبسط والأكثر موثوقية
 app.use('*', cors({
-  origin: ['https://furniture-storee.pages.dev', 'http://localhost:9000','https://furniture-storee.pages.dev'],
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
+  origin: '*',
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowHeaders: ['*'],
+  exposeHeaders: ['*'],
+  maxAge: 86400,
 }));
 
 // ✅ Health Check
