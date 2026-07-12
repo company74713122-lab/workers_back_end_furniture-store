@@ -5,7 +5,7 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 NODE_ENV = "development"
-CORS_ORIGIN = "https://furniture-store-5d3.pages.dev"
+CORS_ORIGIN = "https://furniture-storee.pages.dev"
 CLOUDINARY_CLOUD_NAME = "gkj4ajw3"
 CLOUDINARY_UPLOAD_PRESET = "furniture-store"  # ✅ أضف هذا
 

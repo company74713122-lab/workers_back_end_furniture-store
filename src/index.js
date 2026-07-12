@@ -9,7 +9,7 @@ const app = new Hono();
 // ✅ Middlewares
 app.use('*', logger());
 app.use('*', cors({
-  origin: ['https://furniture-store-5d3.pages.dev', 'http://localhost:9000'],
+  origin: ['https://furniture-storee.pages.dev', 'http://localhost:9000','https://furniture-storee.pages.dev'],
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
