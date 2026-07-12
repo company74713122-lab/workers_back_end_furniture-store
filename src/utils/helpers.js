@@ -14,10 +14,14 @@ export function generateSKU(category) {
 }
 
 // ✅ بناء WHERE clause من filters
+// ✅ بناء WHERE clause من filters
 export function buildWhereClause(filters) {
-  const conditions = ['status = ?'];
-  const params = ['active'];
+  const conditions = [];
+  const params = [];
 
+  // ✅ إزالة الـ default filter للـ status
+  // الآن الـ status يُفلتر فقط إذا تم تمريره
+  
   if (filters.category) {
     conditions.push('category = ?');
     params.push(filters.category);
@@ -36,6 +40,12 @@ export function buildWhereClause(filters) {
   if (filters.size) {
     conditions.push('size = ?');
     params.push(filters.size);
+  }
+
+  // ✅ إضافة فلترة الحالة
+  if (filters.status) {
+    conditions.push('status = ?');
+    params.push(filters.status);
   }
 
   if (filters.minPrice) {
@@ -72,6 +82,14 @@ export function buildWhereClause(filters) {
     conditions.push('(name LIKE ? OR description LIKE ? OR tags LIKE ?)');
     const searchTerm = `%${filters.search}%`;
     params.push(searchTerm, searchTerm, searchTerm);
+  }
+
+  // ✅ إذا لم يكن هناك أي conditions، أرجع شرط عام
+  if (conditions.length === 0) {
+    return {
+      clause: '1 = 1',
+      params: [],
+    };
   }
 
   return {
