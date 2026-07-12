@@ -1,0 +1,16 @@
+name = "furniture-store-api2"
+main = "src/index.js"
+compatibility_date = "2024-09-25"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+NODE_ENV = "development"
+CORS_ORIGIN = "https://furniture-store-5d3.pages.dev"
+CLOUDINARY_CLOUD_NAME = "gkj4ajw3"
+CLOUDINARY_UPLOAD_PRESET = "furniture-store"  # ✅ أضف هذا
+
+# ✅ D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "furniture-store-db"
+database_id = "e620c536-5482-4f40-b3f9-e0f20893e810"

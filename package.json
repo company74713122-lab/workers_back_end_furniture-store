@@ -1,0 +1,23 @@
+{
+  "name": "backend-workers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@hono/zod-validator": "^0.8.0",
+    "hono": "^4.12.29",
+    "jose": "^6.2.3",
+    "slugify": "^1.6.9",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "wrangler": "^4.110.0"
+  }
+}
