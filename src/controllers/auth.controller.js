@@ -5,7 +5,7 @@ import * as authService from '../services/auth.service.js';
 export const register = async (c) => {
   const body = await c.req.json();
   const result = await authService.registerUser(c.env.DB, body, c.env.JWT_SECRET);
-  
+   console.log("c.env.JWT_SECRET" , c.env.JWT_SECRET);
   // Set refresh token in cookie
   c.header('Set-Cookie', `refreshToken=${result.refreshToken}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${7 * 24 * 60 * 60}`);
   
@@ -19,7 +19,7 @@ export const register = async (c) => {
 export const login = async (c) => {
   const body = await c.req.json();
   const result = await authService.loginUser(c.env.DB, body, c.env.JWT_SECRET);
-  
+  console.log("c.env.JWT_SECRET" , c.env.JWT_SECRET);
   // Set refresh token in cookie
   c.header('Set-Cookie', `refreshToken=${result.refreshToken}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${7 * 24 * 60 * 60}`);
   

@@ -1,4 +1,4 @@
-name = "furniture-store-api3"
+name = "furniture-store-api_good2"
 main = "src/index.js"
 compatibility_date = "2024-09-25"
 compatibility_flags = ["nodejs_compat"]
@@ -8,7 +8,7 @@ NODE_ENV = "development"
 CORS_ORIGIN = "https://furniture-storee.pages.dev"
 CLOUDINARY_CLOUD_NAME = "gkj4ajw3"
 CLOUDINARY_UPLOAD_PRESET = "furniture-store"  # ✅ أضف هذا
-
+JWT_SECRET = "3b3d0a21f866391701d7c26079e4e704d91f35ef74ac5fc1b9f0a250ddba240acb50a345e56106c4dfa83cf60830a209aaf38dddb8c310e3ffc36dde47d67d5c"
 # ✅ D1 Database
 [[d1_databases]]
 binding = "DB"
