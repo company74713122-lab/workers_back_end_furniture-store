@@ -10,8 +10,8 @@ const router = new Hono();
 router.post('/login', validate(loginSchema), asyncHandler(controller.login));
 
 // ✅ POST /api/v1/auth/register (Admin only)
-router.post('/register', requireAuth, requireRole('admin'), validate(registerSchema), asyncHandler(controller.register));
-
+router.post('/register', validate(registerSchema), asyncHandler(controller.register));
+//, requireAuth, requireRole('admin'),
 // ✅ POST /api/v1/auth/logout
 router.post('/logout', requireAuth, asyncHandler(controller.logout));
 
