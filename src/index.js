@@ -31,6 +31,7 @@ app.use('*', cors({
       'http://localhost:9000',
       'http://localhost:8787',
       'http://localhost:5173',
+      'https://workers-front-end-furniture-store.pages.dev'
     ];
     
     // Allow requests with no origin (mobile apps, curl, Postman)
