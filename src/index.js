@@ -5,7 +5,7 @@ import { productsRoutes } from './routes/products.routes.js';
 import { authRoutes } from './routes/auth.routes.js';
 
 const app = new Hono();
-
+// test
 // ✅ Enhanced Logger Middleware
 app.use('*', async (c, next) => {
   const start = Date.now();
