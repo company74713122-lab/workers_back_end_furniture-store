@@ -1,4 +1,4 @@
-name = "furniture-store-api_good2"
+name = "furniture-store-api_new1"
 main = "src/index.js"
 compatibility_date = "2024-09-25"
 compatibility_flags = ["nodejs_compat"]
@@ -16,4 +16,4 @@ JWT_SECRET = "3b3d0a21f866391701d7c26079e4e704d91f35ef74ac5fc1b9f0a250ddba240acb
 [[d1_databases]]
 binding = "DB"
 database_name = "furniture-store-db"
-database_id = "e620c536-5482-4f40-b3f9-e0f20893e810"
+database_id = "832a7f22-5af8-4cc2-a22e-bbf03f16ba00"
