@@ -1,6 +1,6 @@
 # company74713122@gmail.com
 
-name = "furniture-store-api_new1"
+name = "back-end-furniture-store"
 main = "src/index.js"
 compatibility_date = "2024-09-25"
 compatibility_flags = ["nodejs_compat"]
